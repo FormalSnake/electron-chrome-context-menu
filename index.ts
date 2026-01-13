@@ -19,7 +19,7 @@ const LABELS = {
   inspect: 'Inspect',
   addToDictionary: 'Add to dictionary',
   exitFullScreen: 'Exit full screen',
-  emoji: 'Emoji',
+  emoji: 'Emoji'
 }
 
 const getBrowserWindowFromWebContents = (webContents: Electron.WebContents) => {
@@ -54,7 +54,7 @@ interface ChromeContextMenuOptions {
   openLink: (
     url: string,
     disposition: 'default' | 'foreground-tab' | 'background-tab' | 'new-window',
-    params: Electron.ContextMenuParams,
+    params: Electron.ContextMenuParams
   ) => void
 
   /** Chrome extension menu items. */
@@ -83,20 +83,20 @@ export const buildChromeContextMenu = (opts: ChromeContextMenuOptions): Menu => 
       label: labels.openInNewTab('link'),
       click: () => {
         openLink(params.linkURL, 'default', params)
-      },
+      }
     })
     append({
       label: labels.openInNewWindow('link'),
       click: () => {
         openLink(params.linkURL, 'new-window', params)
-      },
+      }
     })
     appendSeparator()
     append({
       label: labels.copyAddress('link'),
       click: () => {
         clipboard.writeText(params.linkURL)
-      },
+      }
     })
     appendSeparator()
   } else if (params.mediaType !== 'none') {
@@ -105,13 +105,13 @@ export const buildChromeContextMenu = (opts: ChromeContextMenuOptions): Menu => 
       label: labels.openInNewTab(params.mediaType),
       click: () => {
         openLink(params.srcURL, 'default', params)
-      },
+      }
     })
     append({
       label: labels.copyAddress(params.mediaType),
       click: () => {
         clipboard.writeText(params.srcURL)
-      },
+      }
     })
     appendSeparator()
   }
@@ -121,7 +121,7 @@ export const buildChromeContextMenu = (opts: ChromeContextMenuOptions): Menu => 
       for (const suggestion of params.dictionarySuggestions) {
         append({
           label: suggestion,
-          click: () => webContents.replaceMisspelling(suggestion),
+          click: () => webContents.replaceMisspelling(suggestion)
         })
       }
 
@@ -129,7 +129,7 @@ export const buildChromeContextMenu = (opts: ChromeContextMenuOptions): Menu => 
 
       append({
         label: labels.addToDictionary,
-        click: () => webContents.session.addWordToSpellCheckerDictionary(params.misspelledWord),
+        click: () => webContents.session.addWordToSpellCheckerDictionary(params.misspelledWord)
       })
     } else {
       if (
@@ -138,7 +138,7 @@ export const buildChromeContextMenu = (opts: ChromeContextMenuOptions): Menu => 
       ) {
         append({
           label: labels.emoji,
-          click: () => app.showEmojiPanel(),
+          click: () => app.showEmojiPanel()
         })
         appendSeparator()
       }
@@ -146,12 +146,12 @@ export const buildChromeContextMenu = (opts: ChromeContextMenuOptions): Menu => 
       append({
         label: labels.redo,
         enabled: params.editFlags.canRedo,
-        click: () => webContents.redo(),
+        click: () => webContents.redo()
       })
       append({
         label: labels.undo,
         enabled: params.editFlags.canUndo,
-        click: () => webContents.undo(),
+        click: () => webContents.undo()
       })
     }
 
@@ -160,28 +160,28 @@ export const buildChromeContextMenu = (opts: ChromeContextMenuOptions): Menu => 
     append({
       label: labels.cut,
       enabled: params.editFlags.canCut,
-      click: () => webContents.cut(),
+      click: () => webContents.cut()
     })
     append({
       label: labels.copy,
       enabled: params.editFlags.canCopy,
-      click: () => webContents.copy(),
+      click: () => webContents.copy()
     })
     append({
       label: labels.paste,
       enabled: params.editFlags.canPaste,
-      click: () => webContents.paste(),
+      click: () => webContents.paste()
     })
     append({
       label: labels.delete,
       enabled: params.editFlags.canDelete,
-      click: () => webContents.delete(),
+      click: () => webContents.delete()
     })
     appendSeparator()
     if (params.editFlags.canSelectAll) {
       append({
         label: labels.selectAll,
-        click: () => webContents.selectAll(),
+        click: () => webContents.selectAll()
       })
       appendSeparator()
     }
@@ -190,7 +190,7 @@ export const buildChromeContextMenu = (opts: ChromeContextMenuOptions): Menu => 
       label: labels.copy,
       click: () => {
         clipboard.writeText(params.selectionText)
-      },
+      }
     })
     appendSeparator()
   }
@@ -204,7 +204,7 @@ export const buildChromeContextMenu = (opts: ChromeContextMenuOptions): Menu => 
     if (browserWindow?.fullScreen) {
       append({
         label: labels.exitFullScreen,
-        click: () => browserWindow.setFullScreen(false),
+        click: () => browserWindow.setFullScreen(false)
       })
 
       appendSeparator()
@@ -213,16 +213,16 @@ export const buildChromeContextMenu = (opts: ChromeContextMenuOptions): Menu => 
     append({
       label: labels.back,
       enabled: webContents.navigationHistory.canGoBack(),
-      click: () => webContents.navigationHistory.goBack(),
+      click: () => webContents.navigationHistory.goBack()
     })
     append({
       label: labels.forward,
       enabled: webContents.navigationHistory.canGoForward(),
-      click: () => webContents.navigationHistory.goForward(),
+      click: () => webContents.navigationHistory.goForward()
     })
     append({
       label: labels.reload,
-      click: () => webContents.reload(),
+      click: () => webContents.reload()
     })
     appendSeparator()
   }
@@ -240,7 +240,7 @@ export const buildChromeContextMenu = (opts: ChromeContextMenuOptions): Menu => 
       if (!webContents.isDevToolsFocused()) {
         webContents.devToolsWebContents?.focus()
       }
-    },
+    }
   })
 
   return menu
