@@ -1,8 +1,8 @@
 import { Menu, MenuItem } from 'electron';
 declare const LABELS: {
-    openInNewTab: (type: "link" | Electron.ContextMenuParams["mediaType"]) => string;
-    openInNewWindow: (type: "link" | Electron.ContextMenuParams["mediaType"]) => string;
-    copyAddress: (type: "link" | Electron.ContextMenuParams["mediaType"]) => string;
+    openInNewTab: (type: 'link' | Electron.ContextMenuParams['mediaType']) => string;
+    openInNewWindow: (type: 'link' | Electron.ContextMenuParams['mediaType']) => string;
+    copyAddress: (type: 'link' | Electron.ContextMenuParams['mediaType']) => string;
     undo: string;
     redo: string;
     cut: string;
